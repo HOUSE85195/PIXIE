@@ -1,0 +1,32 @@
+import openai
+import os
+
+openai.api_key = 'your-api-key'
+
+def perform_task(task):
+    # use os or subprocess to perform tasks on your computer
+    pass
+
+def get_response(message):
+    response = openai.Completion.create(
+      engine="text-davinci-003",
+      prompt=message,
+      temperature=0.5,
+      max_tokens=100
+    )
+    return response.choices[0].text.strip()
+
+def chat():
+    print("Hello! I'm PIXIE. How can I assist you today?")
+    while True:
+        message = input("> ")
+        if message == "quit":
+            break
+        elif message.startswith("task:"):
+            task = message.split(":", 1)[1]
+            perform_task(task)
+        else:
+            response = get_response(message)
+            print("PIXIE: ", response)
+
+chat()
